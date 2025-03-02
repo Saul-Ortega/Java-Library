@@ -1,5 +1,6 @@
 package d;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Console {
@@ -27,13 +28,16 @@ public class Console {
 				if (verified_string.length() > length_limit) {
 					error_message = "ERROR: se ha superado el límite de " + length_limit + " caracteres";
 					keep_going = false;
+				} else if (verified_string.length() == 0) {
+					error_message = "ERROR: no se ha introducido ningún dato";
+					keep_going = false;
 				} else {
 					for (int i = 0; i < verified_string.length(); i++) {
-						if (!Character.isLetter(verified_string.charAt(i))) {
+						if (!Character.isLetter(verified_string.charAt(i)) && !Character.isSpaceChar(' ')) {
 							i = verified_string.length();
 							keep_going = false;
 						}
-					}
+					}					
 				}
 			} catch (Exception e) {
 				error_message = "ERROR: ha surjido una excepción";
@@ -48,6 +52,112 @@ public class Console {
 		} while (!keep_going);
 		
 		return verified_string;
+	}
+	public static int consoleErrorManagementInt(Scanner keyboard, String message) {
+		/*
+		 * MÉTODO QUE RECIBE UN OBJETO DE TIPO SCANNER PARA LEER
+		 * POR CONSOLA Y OTRO DE TIPO STRING QUE REPRESENTA UN
+		 * MENSAJE.
+		 * SE CONTROLA QUE EL USUARIO PONGA UN NÚMERO ENTERO.
+		 */
+		int verified_int = 0;
+		boolean keep_going = true;
+		String error_message;
+		
+		do {
+			try {
+				keep_going = true;
+				System.out.println(message);
+				verified_int = keyboard.nextInt();
+			} catch (InputMismatchException e) {
+				error_message = "ERROR: debes introducir un número";
+				System.out.println(error_message);
+				keep_going = false;
+				keyboard.next();
+			} catch (Exception e) {
+				error_message = "ERROR: ha surjido una excepción";
+				System.out.println(error_message);
+				keep_going = false;
+				keyboard.next();
+			}
+		} while (!keep_going);
+		
+		
+		return verified_int;
+	}
+	public static int[] readArrayOfInt(Scanner keyboard, String message, char divider) {
+		/*
+		 * MÉTODO QUE RECIBE UN OBJETO DE TIPO SCANNER, OTRO DE TIPO STRING
+		 * QUE REPRESENTA UN MENAJE Y OTRO DE TIPO CHAR QUE REPRESENTA EL SEPARADOR
+		 * QUE SE VA A USAR.
+		 * CONTROLA QUE EL USUARIO NO INTRODUZCA EL SEPARADOR AL INICIO O AL FINAL,
+		 * TAMBIÉN QUE NO PONGA EL SEPARADOR 2 VECES SEGUIDAS Y QUE SÓLO SE PONGA EL
+		 * SEPARADOR Y LOS DÍGITOS.
+		 * LUEGO LO SEPARA EN UN ARRAY DE TIPO STRING Y SE CASTEA A OTRO ARRAY DE
+		 * TIPO INT Y LO RETORNA.
+		 */
+		String read_string;
+		boolean keep_going = true;
+		String error_message = "";
+		
+		do {
+			keep_going = true;
+			System.out.println(message);
+			read_string = keyboard.nextLine();
+			
+			for (int i = 1; i < read_string.length(); i++) {
+				if (read_string.charAt(0) == divider && read_string.charAt(read_string.length() - 1) == divider) {
+					keep_going = false;
+					i = read_string.length();
+					error_message = "ERROR: no puedes introducir el separador al inicio ni al final";
+				}
+				if (read_string.charAt(i - 1) == divider && read_string.charAt(i) == divider) {
+					keep_going = false;
+					i = read_string.length();
+					error_message = "ERROR: no puedes introducir 2 o más separadores juntos";
+				}
+				if (!Character.isDigit(read_string.charAt(i)) && read_string.charAt(i) != divider) {
+					keep_going = false;
+					i = read_string.length();
+					error_message = "ERROR: has introducido un formato incorrecto";
+				}
+			}
+			
+			if (!keep_going) {
+				System.out.println(error_message);
+			}
+			
+		} while (!keep_going);
+		
+		String string_array[] = read_string.split(Character.toString(divider));
+		int int_array[] = new int[string_array.length];
+		
+		for (int j = 0; j < string_array.length; j++) {
+			int_array[j] = Integer.parseInt(string_array[j]);
+		}
+		
+		return int_array;
+	}
+	public static void printArrayOfInt(int array[]) {
+		/*
+		 * MÉTODO QUE RECIBE UN ARRAY DE TIPO INT Y SEGÚN EL TAMAÑO
+		 * UTILIZA UN FORMATO U OTRO.
+		 */
+		StringBuffer sb = new StringBuffer("");
+		
+		if (array.length == 1) {
+			sb.append("[" + array[0] + "]");
+		} else if (array.length == 2) {
+			sb.append("[" + array[0] + ", " + array[1] + "]");
+		} else {
+			sb.append("[" + array[0]);
+			for (int i = 1; i < array.length - 1; i++) {
+				sb.append(", " + array[i]);
+			}
+			sb.append(", " + array[array.length - 1] + "]");
+		}
+		
+		System.out.println(sb.toString());
 	}
 	public static void printFinishProgram() {
 		/*

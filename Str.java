@@ -22,8 +22,7 @@ public class Str {
 			}
 		}
 		
-		String replaced_string = sb.toString();
-		return replaced_string;
+		return sb.toString();
 	}
 	public static boolean isEqual(String s1, String s2) {
 		/*
@@ -58,8 +57,7 @@ public class Str {
 			sb.append(s.charAt(i));
 		}
 		
-		String reversed_string = sb.toString();
-		return reversed_string;
+		return sb.toString();
 	}
 	public static boolean isAnagram(String s1, String s2) {
 		/*
@@ -91,4 +89,91 @@ public class Str {
 			return true;
 		}
 	}
+	public static String extractString(String s, int initial_pos, int final_pos) {
+		/*
+		 * MÉTODO QUE RECIBE UN STRING QUE REPRESENTA LA CADENA
+		 * Y 2 DATOS DE TIPO INT QUE REPRESENTAN LA POSICIÓN INICIAL
+		 * Y FINAL.
+		 * USA UN BUCLE FOR E INICIALIZA LA I AL VALOR DE LA POSICIÓN
+		 * INCIAL Y FINALIZA EL BUCLE CUANDO LLEGA A LA POSICIÓN
+		 * FINAL.
+		 */
+		StringBuffer sb = new StringBuffer("");
+		
+		for (int i = initial_pos; i <= final_pos; i++) {
+			sb.append(s.charAt(i));
+		}
+		
+		return sb.toString();
+	}
+	public static String deleteString(String s, int initial_pos, int final_pos) {
+		/*
+		 * MÉTODO QUE RECIBE UN STRING QUE REPRESENTA LA CADENA
+		 * Y 2 DATOS DE TIPO INT QUE REPRESENTAN LA POSICIÓN INICIAL
+		 * Y FINAL.
+		 * USA UN BUCLE FOR E INICIALIZA LA VARIABLE "I" A 0 Y REPITE EL BUCLE
+		 * HASTA LLEGAR AL TAMAÑO DEL STRING, EVALÚA QUE "I" SEA INFERIOR QUE
+		 * LA POSICIÓN INICIAL O SUPERIOR A LA POSICIÓN FINAL.
+		 */
+		StringBuffer sb = new StringBuffer("");
+		
+		for (int i = 0; i < s.length(); i++) {
+			if (i < initial_pos || i > final_pos) {
+				sb.append(s.charAt(i));
+			}
+		}
+		
+		return sb.toString();
+	}
+	public static String insertString(String s1, String s2, int initial_pos) {
+		/*
+		 * MÉTODO QUE RECIBE 2 STRINGS POR PARÁMETROS QUE REPRESENTAN
+		 * 2 CADENAS DE TEXTO Y UN DATO DE TIPO INT QUE REPRESENTA
+		 * LA POSICIÓN INICIAL.
+		 * USA UN BUCLE FOR E INICIALIZA LA VARIABLE "I" A O Y REPITE
+		 * EL BUCLE HASTA QUE LLEGUE AL FINAL DEL TAMAÑO DEL 1º STRING,
+		 * POSTERIORMENTE EVALÚA QUE LA VARIABLE "I" SEA IGUAL A LA POSICIÓN
+		 * INICIAL PARA AÑADIR EL 2º STRING Y SIGUE AÑADIENDO LOS CARACTERES
+		 * DEL 1º STRING.
+		 */
+		StringBuffer sb = new StringBuffer("");
+		
+		for (int i = 0; i < s1.length(); i++) {
+			if (i == initial_pos) {
+				sb.append(s2);
+			}
+			sb.append(s1.charAt(i));
+		}
+		
+		return sb.toString();
+	}
+	public static int countWords(String s) {
+		/*
+		 * MÉTODO QUE RECIBE POR PARÁMETRO UN OBJETO DE TIPO STRING.
+		 * CONVIERTE EL STRING EN UN ARRAY DEL MISMO TIPO Y RETORNA
+		 * EL TAMAÑO DE DICHO ARRAY.
+		 */
+		String s_array[] = s.split(" ");
+		
+		return s_array.length;
+	}
+	public static String longestWord(String s) {
+		/*
+		 * MÉTODO QUE RECIBE POR PARÁMETRO UN OBJETO DE TIPO STRING.
+		 * CONVIERTE EL STRING EN UN ARRAY DEL MISMO TIPO, LUEGO
+		 * USA UN BUCLE FOR Y EVALÚA LA PALABRA DE MAYOR TAMAÑO Y
+		 * POSTERIORMENTE SE LO ASIGNA A LA VARIABLE "LONGEST_WORD".
+		 */
+		String s_array[] = s.split(" ");
+		String longest_word = "";
+		
+		for (int i = 0; i < s_array.length; i++) {
+			if (s_array[i].length() > longest_word.length()) {
+				longest_word = s_array[i];
+			}
+		}
+		
+		return longest_word;
+	}
+	
 }
