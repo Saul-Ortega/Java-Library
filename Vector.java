@@ -127,4 +127,200 @@ public class Vector {
 		
 		return return_array;
 	}
+	public static int[] minimumSelectionSort(int array[]) {
+		/*
+		 * MÉTODO QUE RECIBE UN ARRAY DE TIPO INT POR
+		 * PARÁMETRO.
+		 * USA UN BUCLE FOR E INICIALIZA LA VARIABLE "I"
+		 * A OTRA VARIABLE LLAMADA "START_POS" PARA QUE NO
+		 * RECORRA EL ARRAY ENTERO SINO EL RESTO Y RETORNA
+		 * EL ARRAY ORDENADO.
+		 */
+		int min_value;
+		int pos = 0;
+		int start_pos = 0;
+		int counter;
+		int replaced_value;
+		
+		do {
+			counter = 0;
+			min_value = Integer.MAX_VALUE;
+			for (int i = start_pos; i < array.length; i++) {
+				if (min_value > array[i]) {
+					min_value = array[i];
+					pos = i;
+					counter++;
+				}
+			}
+			if (counter != 0) {
+				replaced_value = array[start_pos];
+				array[start_pos] = min_value;
+				array[pos] = replaced_value;
+				start_pos++;
+			}
+		} while (counter != 0);
+		
+		return array;
+	}
+	public static int[] bubbleSort(int array[]) {
+		/*
+		 * MÉTODO QUE RECIBE UN ARRAY DE TIPO INT POR
+		 * PARÁMETRO.
+		 * USA UNA VARIABLE DE TIPO INT "COUNTER" PARA SABER SI
+		 * HAN HABIDO CAMBIOS EN EL ARRAY, SI NO ES ASÍ, PARA EL BUCLE
+		 * Y RETORNA EL ARRAY.
+		 */
+		int counter;
+		
+		do  {
+			counter = 0;
+			for (int i = 1; i < array.length; i++) {
+				if (array[i - 1] > array[i]) {
+					int number_to_replace = array[i - 1];
+					array[i - 1] = array[i];
+					array[i] = number_to_replace;
+					counter++;
+				}
+			}			
+		} while (counter != 0);
+	
+		return array;
+	}
+	public static int[] returnNHighestNumbersInArray(int array[], int n) {
+		/*
+		 * MÉTODO QUE RECIBE UN ARRAY DE TIPO INT Y OTRO DATO DE TIPO
+		 * INT QUE REPRESENTA LA CANTIDAD DE NÚMEROS QUE SE QUIEREN
+		 * RECIBIR DEL ARRAY.
+		 * CREA UN NUEVO ARRAY Y LE INTRODUCE LA CANTIDAD DE "N" DATOS
+		 * QUE SEAN LOS MAYORES DEL ARRAY.
+		 */
+		int new_array[] = new int[n];
+		int counter = 0;
+		
+		for (int i = array.length - n; i < array.length; i++) {
+			new_array[counter] = array[i];
+			counter++;
+		}
+		
+		return new_array;
+	}
+	public static boolean isSortedArrayEqual(int array1[], int array2[]) {
+		/*
+		 * MÉTODO QUE RECIBE 2 ARRAYS DE TIPO INT POR
+		 * PARÁMETROS.
+		 * COMPARA QUE LOS 2 ARRAYS TENGAN EL MISMO TAMAÑO,
+		 * SI NO, RETORNA FALSE, EN CASO AFIRMATIVO, LOS
+		 * ORDENA Y COMPARA ELEMENTO POR ELEMENTO.
+		 */
+		if (array1.length != array2.length) {
+			return false;
+		} else {
+			array1 = minimumSelectionSort(array1);
+			array2 = minimumSelectionSort(array2);
+			
+			for (int i = 0; i < array1.length; i++) {
+				if (array1[i] != array2[i]) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	public static boolean isArrayEqual(int array1[], int array2[]) {
+		/*
+		 * MÉTODO QUE RECIBE 2 ARRAYS DE TIPO INT POR
+		 * PARÁMETROS.
+		 * COMPARA QUE TENGAN EL MISMO TAMAÑO Y QUE CADA
+		 * ELEMENTO TENGA EL MISMO VALOR, EN CASO CONTRARIO
+		 * RETORNARÁ FALSO.
+		 */
+		if (array1.length != array2.length) {
+			return false;
+		} else {
+			for (int i = 0; i < array1.length; i++) {
+				if (array1[i] != array2[i]) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	public static int[] reverseArray(int array[]) {
+		/*
+		 * MÉTODO QUE RECIBE UN ARRAY DE TIPO INT
+		 * POR PARÁMETRO.
+		 * DIVIDE EL TAMAÑO DEL ARRAY ENTRE 2 PARA SABER
+		 * EL NÚMERO DE REEMPLAZOS QUE TIENE QUE REALIZAR
+		 * Y VA REEMPLAZANDO EL ARRAY HASTA QUE FINALICE.
+		 */
+		int array_length = array.length;
+		double number_of_replacements = array_length / 2;
+		int replaced_number;
+		int position_of_replaced = 0;
+
+		if (number_of_replacements % 2 != 0) {
+			number_of_replacements -= 0.5;
+		}
+
+		for (int i = array_length - 1; i > 0; i--) {
+			if (position_of_replaced < number_of_replacements) {
+				replaced_number = array[position_of_replaced];
+				array[position_of_replaced] = array[i];
+				array[i] = replaced_number;
+
+				position_of_replaced++;
+			}
+		}
+
+		return array;
+	}
+	public static int[] sumOfTwoArrays(int array1[], int array2[]) {
+		/*
+		 * MÉTODO QUE RECIBE 2 ARRAYS DE TIPO INT
+		 * POR PARÁMETROS.
+		 * DECLARA UN 3 ARRAY Y CON UN BUCLE FOR,
+		 * VA SUMANDO LOS VALORES DEL 1º Y EL 2º
+		 * ARRAY EN EL 3º ARRAY.
+		 */
+		int array3[] = new int[array1.length];
+		
+		for (int i = 0; i < array1.length; i++) {
+			array3[i] = array1[i] + array2[i];
+		}
+		
+		return array3;
+	}
+	public static int returnMostRepeatedNumberInArray(int array[]) {
+		/*
+		 * MÉTODO QUE RECIBE UN ARRAY DE TIPO INT
+		 * POR PARÁMETRO.
+		 * SE DECLARA UN NUEVO ARRAY QUE ALMACENARÁ
+		 * LAS VECES QUE SE REPITEN CADA UNO DE LOS
+		 * NÚMEROS. LUEGO SE RECORRE ESTE NUEVO ARRAY
+		 * Y SE RETORNA EL NÚMERO QUE MÁS VECES APARECE.
+		 */
+		int new_array[] = new int[10];
+		int most_repeated_times = 0;
+		int most_repeated_number = 0;
+		
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < new_array.length; j++) {
+				if (array[i] == j + 1) {
+					new_array[j] += 1;
+				}
+			}
+		}
+		
+		for (int x = 0; x < new_array.length; x++) {
+			if (new_array[x] > most_repeated_times) {
+				most_repeated_times = new_array[x];
+				most_repeated_number = x + 1;
+			}
+		}
+		
+		return most_repeated_number;
+	}
+	
 }
