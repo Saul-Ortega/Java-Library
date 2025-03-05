@@ -85,7 +85,7 @@ public class Console {
 		
 		return verified_int;
 	}
-	public static int[] readArrayOfInt(Scanner keyboard, String message, char divider) {
+	public static int[] consoleReadArrayOfInt(Scanner keyboard, String message, char divider) {
 		/*
 		 * MÉTODO QUE RECIBE UN OBJETO DE TIPO SCANNER, OTRO DE TIPO STRING
 		 * QUE REPRESENTA UN MENAJE Y OTRO DE TIPO CHAR QUE REPRESENTA EL SEPARADOR
@@ -106,7 +106,7 @@ public class Console {
 			read_string = keyboard.nextLine();
 			
 			for (int i = 1; i < read_string.length(); i++) {
-				if (read_string.charAt(0) == divider && read_string.charAt(read_string.length() - 1) == divider) {
+				if (read_string.charAt(0) == divider || read_string.charAt(read_string.length() - 1) == divider) {
 					keep_going = false;
 					i = read_string.length();
 					error_message = "ERROR: no puedes introducir el separador al inicio ni al final";
@@ -155,6 +155,92 @@ public class Console {
 				sb.append(", " + array[i]);
 			}
 			sb.append(", " + array[array.length - 1] + "]");
+		}
+		
+		System.out.println(sb.toString());
+	}
+	public static int[][] consoleReadMatrixOfInt(Scanner keyboard, String message, char divider, int rows, int columns) {
+		/*
+		 * MÉTODO QUE RECIBE UN OBJETO DE TIPO SCANNER, UN STRING
+		 * QUE REPRESENTA UN MENSAJE, UN CHAR QUE REPRESENTA EL
+		 * SEPARADOR QUE SE USARÁ Y 2 INTS QUE REPRESENTAN EL
+		 * TAMAÑO DE LA MATRIZ POR PARÁMETROS.
+		 * SE HACEN VARIOS CONTROLES DE ERRORES Y SI SE PASAN
+		 * SATISFACTORIAMENTE, SE RETORNA UNA MATRIZ DE TIPO
+		 * INT CON LOS DATOS INDICADOS POR EL USUARIO.
+		 */
+		String read_string;
+		boolean keep_going = true;
+		String error_message = "";
+		int int_matrix[][] = new int[rows][columns];
+		
+		do {
+			keep_going = true;
+			System.out.println(message);
+			read_string = keyboard.nextLine();
+			
+			for (int i = 1; i < read_string.length(); i++) {
+				if (read_string.charAt(0) == divider || read_string.charAt(read_string.length() - 1) == divider) {
+					keep_going = false;
+					i = read_string.length();
+					error_message = "ERROR: no puedes introducir el separador al inicio ni al final";
+				} else if (read_string.charAt(i - 1) == divider && read_string.charAt(i) == divider) {
+					keep_going = false;
+					i = read_string.length();
+					error_message = "ERROR: no puedes introducir 2 o más separadores juntos";
+				} else if (!Character.isDigit(read_string.charAt(i)) && read_string.charAt(i) != divider) {
+					keep_going = false;
+					i = read_string.length();
+					error_message = "ERROR: has introducido un formato incorrecto";
+				}
+			}
+			
+			if (keep_going) {
+				String string_array[] = read_string.split(Character.toString(divider));
+				if (string_array.length == (rows * columns)) {
+					
+					int counter = 0;
+					
+					for (int j = 0; j < rows; j++) {
+						for (int x = 0; x < columns; x++) {
+							int_matrix[j][x] = Integer.parseInt(string_array[counter]);
+							counter++;
+						}
+					}
+					
+					return int_matrix;
+				} else {
+					keep_going = false;
+					error_message = "ERROR: no has introducido los datos correctamente";
+				}
+			}
+			
+			if (!keep_going) {
+				System.out.println(error_message);
+			}
+		} while (!keep_going);
+		
+		return int_matrix;
+	}
+	public static void printMatrixOfInt(int matrix[][]) {
+		/*
+		 * MÉTODO QUE RECIBE UNA MATRIZ DE TIPO INT
+		 * POR PARÁMETRO.
+		 * SE DECLARA UN STRINGBUFFER Y SE VAN AÑADIENDO
+		 * LOS DATOS DE LA MATRIZ MEDIANTE 2 BUCLES FOR,
+		 * CUANDO FINALIZA, SE IMPRIME EL RESULTADO.
+		 */
+		StringBuffer sb = new StringBuffer("");
+		
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[0].length; j++) {
+				if (j == matrix[0].length - 1) {
+					sb.append(matrix[i][j]);
+				} else {
+					sb.append(matrix[i][j] + " | ");
+				}
+			}
+			sb.append("\n");
 		}
 		
 		System.out.println(sb.toString());
