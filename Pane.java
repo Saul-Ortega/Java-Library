@@ -1,16 +1,15 @@
 package d;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import javax.swing.JOptionPane;
 
-public class Console {
+public class Pane {
 
-	public static String consoleErrorManagementString(Scanner keyboard, String message) {
+	public static String paneErrorManagementString(String message) {
 		/*
 		 * MÉTODO PARA LEER POR CONSOLA UN STRING QUE RECIBE POR PARÁMETROS
 		 * EL OBJETO SCANNER Y UN STRING QUE ES EL MENSAJE QUE SE IMPRIMIRÁ
-		 * POR PANTALLA.
-		 * COMPRUEBA QUE EL STRING QUE LEE POR CONSOLA SEA INFERIOR AL TAMAÑO MÁXIMO
+		 * POR UN PANEL.
+		 * COMPRUEBA QUE EL STRING QUE LEE POR PANEL SEA INFERIOR AL TAMAÑO MÁXIMO
 		 * Y QUE TODOS LOS CARACTERES SEAN LETRAS.
 		 */
 		String verified_string = "";
@@ -22,8 +21,7 @@ public class Console {
 			try {
 				keep_going = true;
 				error_message = "ERROR: has introducido un formato incorrecto";
-				System.out.println(message);
-				verified_string = keyboard.nextLine();
+				verified_string = JOptionPane.showInputDialog(null, message);
 				
 				if (verified_string.length() > length_limit) {
 					error_message = "ERROR: se ha superado el límite de " + length_limit + " caracteres";
@@ -41,51 +39,59 @@ public class Console {
 				}
 			} catch (Exception e) {
 				error_message = "ERROR: ha surjido una excepción";
-				System.out.println(error_message);
-				keyboard.next();
+				keep_going = false;
 			}
 			
 			if (!keep_going) {
-				System.out.println(error_message);
+				JOptionPane.showMessageDialog(null, error_message);
 			}
 			
 		} while (!keep_going);
 		
 		return verified_string;
 	}
-	public static int consoleErrorManagementInt(Scanner keyboard, String message) {
+	public static int paneErrorManagementInt(String message) {
 		/*
 		 * MÉTODO QUE RECIBE UN OBJETO DE TIPO SCANNER PARA LEER
-		 * POR CONSOLA Y OTRO DE TIPO STRING QUE REPRESENTA UN
+		 * POR PANEL Y OTRO DE TIPO STRING QUE REPRESENTA UN
 		 * MENSAJE.
 		 * SE CONTROLA QUE EL USUARIO PONGA UN NÚMERO ENTERO.
 		 */
+		String verified_string = "";
 		int verified_int = 0;
 		boolean keep_going = true;
-		String error_message;
+		String error_message = "";
 		
 		do {
 			try {
 				keep_going = true;
-				System.out.println(message);
-				verified_int = keyboard.nextInt();
-			} catch (InputMismatchException e) {
-				error_message = "ERROR: debes introducir un número";
-				System.out.println(error_message);
+				verified_string = JOptionPane.showInputDialog(null, message);
+				
+				for (int i = 0; i < verified_string.length(); i++) {
+					if (!Character.isDigit(verified_string.charAt(i))) {
+						error_message = "ERROR: debes introducir números";
+						keep_going = false;
+						i = verified_string.length();
+					}
+				}
+			} catch (NullPointerException e) {
+				error_message = "ERROR: no puedes cerrar esta ventana";
 				keep_going = false;
-				keyboard.next();
 			} catch (Exception e) {
 				error_message = "ERROR: ha surjido una excepción";
-				System.out.println(error_message);
 				keep_going = false;
-				keyboard.next();
+			}
+			
+			if (!keep_going) {
+				JOptionPane.showMessageDialog(null, error_message);
+			} else {
+				verified_int = Integer.parseInt(verified_string);
 			}
 		} while (!keep_going);
 		
-		
 		return verified_int;
 	}
-	public static int[] consoleReadArrayOfInt(Scanner keyboard, String message, char divider) {
+	public static int[] paneReadArrayOfInt(String message, char divider) {
 		/*
 		 * MÉTODO QUE RECIBE UN OBJETO DE TIPO SCANNER, OTRO DE TIPO STRING
 		 * QUE REPRESENTA UN MENAJE Y OTRO DE TIPO CHAR QUE REPRESENTA EL SEPARADOR
@@ -102,8 +108,7 @@ public class Console {
 		
 		do {
 			keep_going = true;
-			System.out.println(message);
-			read_string = keyboard.nextLine();
+			read_string = JOptionPane.showInputDialog(null, message);
 			
 			for (int i = 1; i < read_string.length(); i++) {
 				if (read_string.charAt(0) == divider || read_string.charAt(read_string.length() - 1) == divider) {
@@ -124,7 +129,7 @@ public class Console {
 			}
 			
 			if (!keep_going) {
-				System.out.println(error_message);
+				JOptionPane.showMessageDialog(null, error_message);
 			}
 			
 		} while (!keep_going);
@@ -138,7 +143,7 @@ public class Console {
 		
 		return int_array;
 	}
-	public static void printArrayOfInt(int array[]) {
+	public static void printPaneArrayOfInt(int array[]) {
 		/*
 		 * MÉTODO QUE RECIBE UN ARRAY DE TIPO INT Y SEGÚN EL TAMAÑO
 		 * UTILIZA UN FORMATO U OTRO.
@@ -157,9 +162,9 @@ public class Console {
 			sb.append(", " + array[array.length - 1] + "]");
 		}
 		
-		System.out.println(sb.toString());
+		JOptionPane.showMessageDialog(null, sb);
 	}
-	public static int[][] consoleReadMatrixOfInt(Scanner keyboard, String message, char divider, int rows, int columns) {
+	public static int[][] paneReadMatrixOfInt(String message, char divider, int rows, int columns) {
 		/*
 		 * MÉTODO QUE RECIBE UN OBJETO DE TIPO SCANNER, UN STRING
 		 * QUE REPRESENTA UN MENSAJE, UN CHAR QUE REPRESENTA EL
@@ -176,8 +181,7 @@ public class Console {
 		
 		do {
 			keep_going = true;
-			System.out.println(message);
-			read_string = keyboard.nextLine();
+			read_string = JOptionPane.showInputDialog(null, message);
 			
 			for (int i = 1; i < read_string.length(); i++) {
 				if (read_string.charAt(0) == divider || read_string.charAt(read_string.length() - 1) == divider) {
@@ -216,76 +220,13 @@ public class Console {
 			}
 			
 			if (!keep_going) {
-				System.out.println(error_message);
+				JOptionPane.showMessageDialog(null, error_message);
 			}
 		} while (!keep_going);
 		
 		return int_matrix;
 	}
-	public static String[][] consoleReadMatrixOfString(Scanner keyboard, String message, char divider, int rows, int columns) {
-		/*
-		 * MÉTODO QUE RECIBE UN OBJETO DE TIPO SCANNER, UN STRING
-		 * QUE REPRESENTA UN MENSAJE, UN CHAR QUE REPRESENTA EL
-		 * SEPARADOR QUE SE USARÁ Y 2 INTS QUE REPRESENTAN EL
-		 * TAMAÑO DE LA MATRIZ POR PARÁMETROS.
-		 * SE HACEN VARIOS CONTROLES DE ERRORES Y SI SE PASAN
-		 * SATISFACTORIAMENTE, SE RETORNA UNA MATRIZ DE TIPO
-		 * STRING CON LOS DATOS INDICADOS POR EL USUARIO.
-		 */
-		String read_string;
-		boolean keep_going = true;
-		String error_message = "";
-		String string_matrix[][] = new String[rows][columns];
-		
-		do {
-			keep_going = true;
-			System.out.println(message);
-			read_string = keyboard.nextLine();
-			
-			for (int i = 1; i < read_string.length(); i++) {
-				if (read_string.charAt(0) == divider || read_string.charAt(read_string.length() - 1) == divider) {
-					keep_going = false;
-					i = read_string.length();
-					error_message = "ERROR: no puedes introducir el separador al inicio ni al final";
-				} else if (read_string.charAt(i - 1) == divider && read_string.charAt(i) == divider) {
-					keep_going = false;
-					i = read_string.length();
-					error_message = "ERROR: no puedes introducir 2 o más separadores juntos";
-				} else if (!Character.isDigit(read_string.charAt(i)) && read_string.charAt(i) != divider) {
-					keep_going = false;
-					i = read_string.length();
-					error_message = "ERROR: has introducido un formato incorrecto";
-				}
-			}
-			
-			if (keep_going) {
-				String string_array[] = read_string.split(Character.toString(divider));
-				if (string_array.length == (rows * columns)) {
-					
-					int counter = 0;
-					
-					for (int j = 0; j < rows; j++) {
-						for (int x = 0; x < columns; x++) {
-							string_matrix[j][x] = string_array[counter];
-							counter++;
-						}
-					}
-					
-					return string_matrix;
-				} else {
-					keep_going = false;
-					error_message = "ERROR: no has introducido los datos correctamente";
-				}
-			}
-			
-			if (!keep_going) {
-				System.out.println(error_message);
-			}
-		} while (!keep_going);
-		
-		return string_matrix;
-	}
-	public static void printConsoleMatrixOfInt(int matrix[][]) {
+	public static void printPaneMatrixOfInt(int matrix[][]) {
 		/*
 		 * MÉTODO QUE RECIBE UNA MATRIZ DE TIPO INT
 		 * POR PARÁMETRO.
@@ -306,39 +247,14 @@ public class Console {
 			sb.append("\n");
 		}
 		
-		System.out.println(sb.toString());
+		JOptionPane.showMessageDialog(null, sb);
 	}
-	public static void printConsoleMatrixOfString(String matrix[][]) {
-		/*
-		 * MÉTODO QUE RECIBE UNA MATRIZ DE TIPO STRING
-		 * POR PARÁMETRO.
-		 * SE DECLARA UN STRINGBUFFER Y SE VAN AÑADIENDO
-		 * LOS DATOS DE LA MATRIZ MEDIANTE 2 BUCLES FOR,
-		 * CUANDO FINALIZA, SE IMPRIME EL RESULTADO.
-		 */
-		StringBuffer sb = new StringBuffer("");
-		
-		for (int i = 0; i < matrix.length; i++) {
-			for (int j = 0; j < matrix[0].length; j++) {
-				if (j == matrix[0].length - 1) {
-					sb.append(matrix[i][j]);
-				} else {
-					sb.append(matrix[i][j] + " | ");
-				}
-			}
-			sb.append("\n");
-		}
-		
-		System.out.println(sb.toString());
-	}
-	public static void printFinishProgram() {
+	public static void printPaneFinishProgram() {
 		/*
 		 * MÉTODO QUE INDICA AL USUARIO QUE EL
 		 * PROGRAMA HA FINALIZADO.
 		 */
-		System.out.println("***********************************");
-		System.out.println("PROGRAMA FINALIZADO");
-		System.out.println("***********************************");
+		JOptionPane.showMessageDialog(null, "PROGRAMA FINALIZADO");
 	}
 	
 }

@@ -322,5 +322,34 @@ public class Vector {
 		
 		return most_repeated_number;
 	}
+	public static int[] returnNumbersInFirstArrayAndNotInSecond(int array1[], int array2[]) {
+		/*
+		 * MÉTODO QUE RECIBE 2 ARRAYS POR PARÁMETROS.
+		 * REALIZA UN BUCLE FOR Y EVALÚA UNA CONDICIÓN
+		 * CON OTRO MÉTODO PERSONAL Y LE SUMA A LA VARIABLE
+		 * "ARRAY_LENGTH" 1, DE ESTA FORMA, SABEMOS EL TAMAÑO
+		 * DEL ARRAY Y VOLVEMOS A RECORRER EL BUCLE PARA ASIGNARLE
+		 * LOS VALORES Y RETORNAR EL NUEVO ARRAY.
+		 */
+		int array_length = 0;
+		
+		for (int i = 0; i < array1.length; i++) {
+			if (!containsIntArray(array2, array1[i])) {
+				array_length++;
+			}
+		}
+		
+		int array3[] = new int[array_length];
+		int counter = 0;
+		
+		for (int j = 0; j < array1.length; j++) {
+			if (!containsIntArray(array2, array1[j])) {
+				array3[counter] = array1[j];
+				counter++;
+			}
+		}
+		
+		return array3;
+	}
 	
 }

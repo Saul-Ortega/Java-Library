@@ -1,7 +1,6 @@
 package d;
 
 import java.util.Random;
-import java.util.Scanner;
 
 public class Matrix {
 	public static int[][] getRandomMatrixOfInt(int rows, int columns) {
@@ -61,6 +60,50 @@ public class Matrix {
 		}
 		
 		return true;
+	}
+	public static String[][] returnConcatOfTwoMatrix(String matrix1[][], String matrix2[][]) {
+		/*
+		 * MÉTODO QUE RECIBE 2 MATRICES DE TIPO STRING
+		 * POR PARÁMETRO.
+		 * SE DECLARA UNA NUEVA MATRIZ DE TIPO STRING QUE
+		 * ALMACENARÁ LA CONCATENACIÓN DE AMBAS MATRICES
+		 * Y LUEGO SE RETORNA.
+		 */
+		String new_matrix[][] = new String[matrix1.length][matrix1[0].length + matrix2[0].length];
+		int counter_columns = 0;
+		
+		for (int i = 0; i < matrix1.length; i++) {
+			for (int j = 0; j < matrix1[0].length; j++) {
+				new_matrix[i][j] = matrix1[i][j];
+			}
+		}
+		
+		for (int x = 0; x < matrix2.length; x++) {
+			counter_columns = matrix1[0].length;
+			for (int y = 0; y < matrix2[0].length; y++) {
+				new_matrix[x][counter_columns] = matrix2[x][y];
+				counter_columns++;
+			}
+		}
+		
+		return new_matrix;
+	}
+	public static int[][] transposeMatrix(int matrix[][]) {
+		/*
+		 * MÉTODO QUE RECIBE UNA MATRIZ POR
+		 * PARÁMETRO.
+		 * DECLARA UNA NUEVA MATRIZ Y LE INTRODUCE
+		 * LOS DATOS DE FORMA TRANSPUESTA.
+		 */
+		int new_matrix[][] = new int[matrix[0].length][matrix.length];
+		
+		for (int i = 0; i < new_matrix.length; i++) {
+			for (int j = 0; j < new_matrix[0].length; j++) {
+				new_matrix[i][j] = matrix[j][i];
+			}
+		}
+		
+		return new_matrix;
 	}
 	
 }
