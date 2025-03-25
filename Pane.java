@@ -1,5 +1,8 @@
 package d;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import javax.swing.JOptionPane;
 
 public class Pane {
@@ -90,6 +93,48 @@ public class Pane {
 		} while (!keep_going);
 		
 		return verified_int;
+	}
+	public static double consoleErrorManagementDouble(String message) {
+		/*
+		 * MÉTODO QUE RECIBE UN OBJETO DE TIPO SCANNER PARA LEER
+		 * POR JOPTIONPANE Y OTRO DE TIPO STRING QUE REPRESENTA UN
+		 * MENSAJE.
+		 * SE CONTROLA QUE EL USUARIO PONGA UN NÚMERO CON COMA
+		 * FLOTANTE.
+		 */
+		String verified_string = "";
+		double verified_double = 0;
+		boolean keep_going = true;
+		String error_message = "";
+		
+		do {
+			try {
+				keep_going = true;
+				verified_string = JOptionPane.showInputDialog(null, message);
+				
+				for (int i = 0; i < verified_string.length(); i++) {
+					if (!Character.isDigit(verified_string.charAt(i))) {
+						error_message = "ERROR: debes introducir números";
+						keep_going = false;
+						i = verified_string.length();
+					}
+				}
+			} catch (NullPointerException e) {
+				error_message = "ERROR: no puedes cerrar esta ventana";
+				keep_going = false;
+			} catch (Exception e) {
+				error_message = "ERROR: ha surjido una excepción";
+				keep_going = false;
+			}
+			
+			if (!keep_going) {
+				JOptionPane.showMessageDialog(null, error_message);
+			} else {
+				verified_double = Double.parseDouble(verified_string);
+			}
+		} while (!keep_going);
+		
+		return verified_double;
 	}
 	public static int[] paneReadArrayOfInt(String message, char divider) {
 		/*
@@ -229,6 +274,29 @@ public class Pane {
 	public static void printPaneMatrixOfInt(int matrix[][]) {
 		/*
 		 * MÉTODO QUE RECIBE UNA MATRIZ DE TIPO INT
+		 * POR PARÁMETRO.
+		 * SE DECLARA UN STRINGBUFFER Y SE VAN AÑADIENDO
+		 * LOS DATOS DE LA MATRIZ MEDIANTE 2 BUCLES FOR,
+		 * CUANDO FINALIZA, SE IMPRIME EL RESULTADO.
+		 */
+		StringBuffer sb = new StringBuffer("");
+		
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[0].length; j++) {
+				if (j == matrix[0].length - 1) {
+					sb.append(matrix[i][j]);
+				} else {
+					sb.append(matrix[i][j] + " | ");
+				}
+			}
+			sb.append("\n");
+		}
+		
+		JOptionPane.showMessageDialog(null, sb);
+	}
+	public static void printPaneMatrixOfString(String matrix[][]) {
+		/*
+		 * MÉTODO QUE RECIBE UNA MATRIZ DE TIPO STRING
 		 * POR PARÁMETRO.
 		 * SE DECLARA UN STRINGBUFFER Y SE VAN AÑADIENDO
 		 * LOS DATOS DE LA MATRIZ MEDIANTE 2 BUCLES FOR,

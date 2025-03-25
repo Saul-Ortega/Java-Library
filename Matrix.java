@@ -105,5 +105,90 @@ public class Matrix {
 		
 		return new_matrix;
 	}
-	
+	public static int getLongestColumnFromString(String s, char divider_rows, char divider_columns) {
+		/*
+		 * MÉTODO QUE RECIBE UN OBJETO DE TIPO STRING PARA QUE
+		 * CONVERTIRLO EN UNA MATRIZ DE TIPO STRING Y 2 DATOS DE TIPO
+		 * CHAR QUE REPRESENTAN LOS SEPARADORES DE COLUMNAS Y DE LAS FILAS.
+		 * DECLARA 2 VARIABLES DE TIPO INT QUE REPRESENTAN UN CONTADOR DEL
+		 * SEPARADOR Y LA VARIABLE DE COLUMNAS MÁXIMAS QUE SERÁ LA QUE SE
+		 * RETORNARÁ.
+		 */
+		int max_columns = 0;
+		int counter_divider = 1;
+		
+		for (int i = 0; i < s.length(); i++) {
+			
+			if (s.charAt(i) == divider_columns) {
+				counter_divider++;
+			}
+			
+			if (counter_divider > max_columns) {
+				max_columns = counter_divider;
+			}
+			
+			if (s.charAt(i) == divider_rows) {
+				counter_divider = 1;
+			}
+			
+		}
+		
+		return max_columns;
+	}
+	public static String[][] returnStringMatrixFromString(String s, char divider_rows, char divider_columns) {
+		/*
+		 * MÉTODO QUE RECIBE UN OBJETO DE TIPO STRING PARA QUE
+		 * CONVERTIRLO EN UNA MATRIZ DE TIPO STRING Y 2 DATOS DE TIPO
+		 * CHAR QUE REPRESENTAN LOS SEPARADORES DE COLUMNAS Y DE LAS FILAS.
+		 * DECLARA UN ARRAY DE TIPO STRING PARA ALMACENAR LOS DATOS EN FILAS,
+		 * LUEGO MEDIANTE OTRO MÉTODO, SE OBTIENE LAS COLUMNAS QUE SE NECESITARÁN
+		 * PARA LA MATRIZ Y VA ALMACENANDO LOS DATOS EN LA MATRIZ PARA LUEGO,
+		 * RETORNARLO
+		 */
+		String rows_array[] = s.split(Character.toString(divider_rows));
+		
+		int rows = rows_array.length;
+		
+		int columns = getLongestColumnFromString(s, divider_rows, divider_columns);
+		
+		
+		String matrix[][] = new String[rows][columns];
+		
+		int counter;
+		
+		for (int i = 0; i < rows; i++) {
+			counter = 0;
+			String columns_array[] = rows_array[i].split(Character.toString(divider_columns));
+			for (int j = 0; j < columns_array.length; j++) {
+				matrix[i][j] = columns_array[counter];
+				counter++;
+			}
+		}
+		
+		return matrix;
+	}
+	public static String[][] returnAverageOfTwoNumsFromStringMatrix(String matrix[][]) {
+		/*
+		 * MÉTODO QUE RECIBE UNA MATRIZ DE TIPO STRING POR
+		 * PARÁMETROS.
+		 * USA 2 BUCLES FOR, CONSIGUE LOS VALORES DE LA TEMPERATURA
+		 * MÁXIMA Y MÍNIMA, LUEGO SACA LA MEDIA Y LO CASTEA A UN STRING.
+		 * POSTERIORMENTE, LO RETORNA
+		 */
+		String new_matrix[][] = new String[matrix.length][matrix[0].length + 1];
+		
+		for (int i = 0; i < new_matrix.length; i++) {
+			for (int j = 0; j < new_matrix[0].length; j++) {
+				if (j == 3) {
+					double first_temp = Double.parseDouble(matrix[i][1]);
+					double second_temp = Double.parseDouble(matrix[i][2]);
+					new_matrix[i][j] = Double.toString((first_temp + second_temp) / 2);
+				} else {
+					new_matrix[i][j] = matrix[i][j];					
+				}
+			}
+		}
+		
+		return new_matrix;
+	}
 }

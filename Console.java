@@ -4,6 +4,11 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Console {
+	
+	/*
+	 * OJO!!!
+	 * LIMPIAR EL BÚFER CON KEYBOARD.NEXTLINE() SI SE REPITE EL MENSAJE DE ERROR
+	 */
 
 	public static String consoleErrorManagementString(Scanner keyboard, String message) {
 		/*
@@ -51,6 +56,8 @@ public class Console {
 			
 		} while (!keep_going);
 		
+		//keyboard.nextLine(); LIMPIAR EL BÚFER
+		
 		return verified_string;
 	}
 	public static int consoleErrorManagementInt(Scanner keyboard, String message) {
@@ -82,8 +89,43 @@ public class Console {
 			}
 		} while (!keep_going);
 		
+		//keyboard.nextLine(); LIMPIAR EL BÚFER
 		
 		return verified_int;
+	}
+	public static double consoleErrorManagementDouble(Scanner keyboard, String message) {
+		/*
+		 * MÉTODO QUE RECIBE UN OBJETO DE TIPO SCANNER PARA LEER
+		 * POR CONSOLA Y OTRO DE TIPO STRING QUE REPRESENTA UN
+		 * MENSAJE.
+		 * SE CONTROLA QUE EL USUARIO PONGA UN NÚMERO CON COMA
+		 * FLOTANTE.
+		 */
+		double verified_double = 0;
+		boolean keep_going = true;
+		String error_message;
+		
+		do {
+			try {
+				keep_going = true;
+				System.out.println(message);
+				verified_double = keyboard.nextDouble();
+			} catch (InputMismatchException e) {
+				error_message = "ERROR: debes introducir un número";
+				System.out.println(error_message);
+				keep_going = false;
+				keyboard.next();
+			} catch (Exception e) {
+				error_message = "ERROR: ha surjido una excepción";
+				System.out.println(error_message);
+				keep_going = false;
+				keyboard.next();
+			}
+		} while (!keep_going);
+		
+		//keyboard.nextLine(); LIMPIAR EL BÚFER
+		
+		return verified_double;
 	}
 	public static int[] consoleReadArrayOfInt(Scanner keyboard, String message, char divider) {
 		/*
@@ -108,17 +150,17 @@ public class Console {
 			for (int i = 1; i < read_string.length(); i++) {
 				if (read_string.charAt(0) == divider || read_string.charAt(read_string.length() - 1) == divider) {
 					keep_going = false;
-					i = read_string.length();
+					i = read_string.length() - 1;
 					error_message = "ERROR: no puedes introducir el separador al inicio ni al final";
 				}
 				if (read_string.charAt(i - 1) == divider && read_string.charAt(i) == divider) {
 					keep_going = false;
-					i = read_string.length();
+					i = read_string.length() - 1;
 					error_message = "ERROR: no puedes introducir 2 o más separadores juntos";
 				}
 				if (!Character.isDigit(read_string.charAt(i)) && read_string.charAt(i) != divider) {
 					keep_going = false;
-					i = read_string.length();
+					i = read_string.length() - 1;
 					error_message = "ERROR: has introducido un formato incorrecto";
 				}
 			}
@@ -141,6 +183,27 @@ public class Console {
 	public static void printArrayOfInt(int array[]) {
 		/*
 		 * MÉTODO QUE RECIBE UN ARRAY DE TIPO INT Y SEGÚN EL TAMAÑO
+		 * UTILIZA UN FORMATO U OTRO.
+		 */
+		StringBuffer sb = new StringBuffer("");
+		
+		if (array.length == 1) {
+			sb.append("[" + array[0] + "]");
+		} else if (array.length == 2) {
+			sb.append("[" + array[0] + ", " + array[1] + "]");
+		} else {
+			sb.append("[" + array[0]);
+			for (int i = 1; i < array.length - 1; i++) {
+				sb.append(", " + array[i]);
+			}
+			sb.append(", " + array[array.length - 1] + "]");
+		}
+		
+		System.out.println(sb.toString());
+	}
+	public static void printArrayOfString(String array[]) {
+		/*
+		 * MÉTODO QUE RECIBE UN ARRAY DE TIPO SSTRING Y SEGÚN EL TAMAÑO
 		 * UTILIZA UN FORMATO U OTRO.
 		 */
 		StringBuffer sb = new StringBuffer("");
