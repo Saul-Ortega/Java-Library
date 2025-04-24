@@ -69,24 +69,24 @@ public class Matrix {
 		 * ALMACENARÁ LA CONCATENACIÓN DE AMBAS MATRICES
 		 * Y LUEGO SE RETORNA.
 		 */
-		String new_matrix[][] = new String[matrix1.length][matrix1[0].length + matrix2[0].length];
-		int counter_columns = 0;
+		String newMatrix[][] = new String[matrix1.length][matrix1[0].length + matrix2[0].length];
+		int counterColumns = 0;
 		
 		for (int i = 0; i < matrix1.length; i++) {
 			for (int j = 0; j < matrix1[0].length; j++) {
-				new_matrix[i][j] = matrix1[i][j];
+				newMatrix[i][j] = matrix1[i][j];
 			}
 		}
 		
 		for (int x = 0; x < matrix2.length; x++) {
-			counter_columns = matrix1[0].length;
+			counterColumns = matrix1[0].length;
 			for (int y = 0; y < matrix2[0].length; y++) {
-				new_matrix[x][counter_columns] = matrix2[x][y];
-				counter_columns++;
+				newMatrix[x][counterColumns] = matrix2[x][y];
+				counterColumns++;
 			}
 		}
 		
-		return new_matrix;
+		return newMatrix;
 	}
 	public static int[][] transposeMatrix(int matrix[][]) {
 		/*
@@ -95,17 +95,17 @@ public class Matrix {
 		 * DECLARA UNA NUEVA MATRIZ Y LE INTRODUCE
 		 * LOS DATOS DE FORMA TRANSPUESTA.
 		 */
-		int new_matrix[][] = new int[matrix[0].length][matrix.length];
+		int newMatrix[][] = new int[matrix[0].length][matrix.length];
 		
-		for (int i = 0; i < new_matrix.length; i++) {
-			for (int j = 0; j < new_matrix[0].length; j++) {
-				new_matrix[i][j] = matrix[j][i];
+		for (int i = 0; i < newMatrix.length; i++) {
+			for (int j = 0; j < newMatrix[0].length; j++) {
+				newMatrix[i][j] = matrix[j][i];
 			}
 		}
 		
-		return new_matrix;
+		return newMatrix;
 	}
-	public static int getLongestColumnFromString(String s, char divider_rows, char divider_columns) {
+	public static int getLongestColumnFromString(String s, char dividerRows, char dividerColumns) {
 		/*
 		 * MÉTODO QUE RECIBE UN OBJETO DE TIPO STRING PARA QUE
 		 * CONVERTIRLO EN UNA MATRIZ DE TIPO STRING Y 2 DATOS DE TIPO
@@ -114,28 +114,28 @@ public class Matrix {
 		 * SEPARADOR Y LA VARIABLE DE COLUMNAS MÁXIMAS QUE SERÁ LA QUE SE
 		 * RETORNARÁ.
 		 */
-		int max_columns = 0;
-		int counter_divider = 1;
+		int maxColumns = 0;
+		int counterDivider = 1;
 		
 		for (int i = 0; i < s.length(); i++) {
 			
-			if (s.charAt(i) == divider_columns) {
-				counter_divider++;
+			if (s.charAt(i) == dividerColumns) {
+				counterDivider++;
 			}
 			
-			if (counter_divider > max_columns) {
-				max_columns = counter_divider;
+			if (counterDivider > maxColumns) {
+				maxColumns = counterDivider;
 			}
 			
-			if (s.charAt(i) == divider_rows) {
-				counter_divider = 1;
+			if (s.charAt(i) == dividerRows) {
+				counterDivider = 1;
 			}
 			
 		}
 		
-		return max_columns;
+		return maxColumns;
 	}
-	public static String[][] returnStringMatrixFromString(String s, char divider_rows, char divider_columns) {
+	public static String[][] returnStringMatrixFromString(String s, char dividerRows, char dividerColumns) {
 		/*
 		 * MÉTODO QUE RECIBE UN OBJETO DE TIPO STRING PARA QUE
 		 * CONVERTIRLO EN UNA MATRIZ DE TIPO STRING Y 2 DATOS DE TIPO
@@ -145,11 +145,11 @@ public class Matrix {
 		 * PARA LA MATRIZ Y VA ALMACENANDO LOS DATOS EN LA MATRIZ PARA LUEGO,
 		 * RETORNARLO
 		 */
-		String rows_array[] = s.split(Character.toString(divider_rows));
+		String rowsArray[] = s.split(Character.toString(dividerRows));
 		
-		int rows = rows_array.length;
+		int rows = rowsArray.length;
 		
-		int columns = getLongestColumnFromString(s, divider_rows, divider_columns);
+		int columns = getLongestColumnFromString(s, dividerRows, dividerColumns);
 		
 		
 		String matrix[][] = new String[rows][columns];
@@ -158,9 +158,9 @@ public class Matrix {
 		
 		for (int i = 0; i < rows; i++) {
 			counter = 0;
-			String columns_array[] = rows_array[i].split(Character.toString(divider_columns));
-			for (int j = 0; j < columns_array.length; j++) {
-				matrix[i][j] = columns_array[counter];
+			String columnsArray[] = rowsArray[i].split(Character.toString(dividerColumns));
+			for (int j = 0; j < columnsArray.length; j++) {
+				matrix[i][j] = columnsArray[counter];
 				counter++;
 			}
 		}
@@ -175,20 +175,20 @@ public class Matrix {
 		 * MÁXIMA Y MÍNIMA, LUEGO SACA LA MEDIA Y LO CASTEA A UN STRING.
 		 * POSTERIORMENTE, LO RETORNA
 		 */
-		String new_matrix[][] = new String[matrix.length][matrix[0].length + 1];
+		String newMatrix[][] = new String[matrix.length][matrix[0].length + 1];
 		
-		for (int i = 0; i < new_matrix.length; i++) {
-			for (int j = 0; j < new_matrix[0].length; j++) {
+		for (int i = 0; i < newMatrix.length; i++) {
+			for (int j = 0; j < newMatrix[0].length; j++) {
 				if (j == 3) {
-					double first_temp = Double.parseDouble(matrix[i][1]);
-					double second_temp = Double.parseDouble(matrix[i][2]);
-					new_matrix[i][j] = Double.toString((first_temp + second_temp) / 2);
+					double firstTemp = Double.parseDouble(matrix[i][1]);
+					double secondTemp = Double.parseDouble(matrix[i][2]);
+					newMatrix[i][j] = Double.toString((firstTemp + secondTemp) / 2);
 				} else {
-					new_matrix[i][j] = matrix[i][j];					
+					newMatrix[i][j] = matrix[i][j];					
 				}
 			}
 		}
 		
-		return new_matrix;
+		return newMatrix;
 	}
 }
