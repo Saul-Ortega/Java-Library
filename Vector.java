@@ -48,7 +48,7 @@ public class Vector {
 		
 		return counter;
 	}
-	public static int[] returnIntArrayReplacingNumber(int array[], int replaced_number, int number_to_replace) {
+	public static int[] returnIntArrayReplacingNumber(int array[], int replacedNumber, int numberToReplace) {
 		/*
 		 * MÉTODO QUE RECIBE UN ARRAY DE TIPO INT Y OTROS 2
 		 * DATOS DE TIPO INT QUE SON EL NÚMERO A REEMPLAZAR
@@ -57,8 +57,8 @@ public class Vector {
 		 * REEMPLAZA EL NÚMERO Y DEVUELVE EL ARRAY.
 		 */
 		for (int i = 0; i < array.length; i++) {
-			if (array[i] == replaced_number) {
-				array[i] = number_to_replace;
+			if (array[i] == replacedNumber) {
+				array[i] = numberToReplace;
 			}
 		}
 		
@@ -106,7 +106,7 @@ public class Vector {
 		
 		return array3;
 	}
-	public static int[] extractIntArray(int array[], int initial_pos, int final_pos) {
+	public static int[] extractIntArray(int array[], int initialPos, int finalPos) {
 		/*
 		 * MÉTODO QUE RECIBE UN ARRAY DE TIPO INT Y OTROS 2 DATOS
 		 * DE TIPO INT QUE REPRESENTAN LA POSICIÓN INICIAL Y LA
@@ -115,17 +115,17 @@ public class Vector {
 		 * FOR Y SI LA VARIABLE "I" SE ENCUENTRA FUERA DE LA POSICIÓN
 		 * INICIAL Y FINAL, INTRODUCE DATOS EN EL NUEVO ARRAY PARA RETORNARLO.
 		 */
-		int return_array[] = new int[array.length - (final_pos - initial_pos) - 1];
+		int returnArray[] = new int[array.length - (finalPos - initialPos) - 1];
 		int counter = 0;
 		
 		for (int i = 0; i < array.length; i++) {
-			if (i < initial_pos || i > final_pos) {
-				return_array[counter] = array[i];
+			if (i < initialPos || i > finalPos) {
+				returnArray[counter] = array[i];
 				counter++;
 			}
 		}
 		
-		return return_array;
+		return returnArray;
 	}
 	public static int[] minimumSelectionSort(int array[]) {
 		/*
@@ -136,27 +136,27 @@ public class Vector {
 		 * RECORRA EL ARRAY ENTERO SINO EL RESTO Y RETORNA
 		 * EL ARRAY ORDENADO.
 		 */
-		int min_value;
+		int minValue;
 		int pos = 0;
-		int start_pos = 0;
+		int startPos = 0;
 		int counter;
-		int replaced_value;
+		int replacedValue;
 		
 		do {
 			counter = 0;
-			min_value = Integer.MAX_VALUE;
-			for (int i = start_pos; i < array.length; i++) {
-				if (min_value > array[i]) {
-					min_value = array[i];
+			minValue = Integer.MAX_VALUE;
+			for (int i = startPos; i < array.length; i++) {
+				if (minValue > array[i]) {
+					minValue = array[i];
 					pos = i;
 					counter++;
 				}
 			}
 			if (counter != 0) {
-				replaced_value = array[start_pos];
-				array[start_pos] = min_value;
-				array[pos] = replaced_value;
-				start_pos++;
+				replacedValue = array[startPos];
+				array[startPos] = minValue;
+				array[pos] = replacedValue;
+				startPos++;
 			}
 		} while (counter != 0);
 		
@@ -176,9 +176,9 @@ public class Vector {
 			counter = 0;
 			for (int i = 1; i < array.length; i++) {
 				if (array[i - 1] > array[i]) {
-					int number_to_replace = array[i - 1];
+					int numberToReplace = array[i - 1];
 					array[i - 1] = array[i];
-					array[i] = number_to_replace;
+					array[i] = numberToReplace;
 					counter++;
 				}
 			}			
@@ -194,15 +194,15 @@ public class Vector {
 		 * CREA UN NUEVO ARRAY Y LE INTRODUCE LA CANTIDAD DE "N" DATOS
 		 * QUE SEAN LOS MAYORES DEL ARRAY.
 		 */
-		int new_array[] = new int[n];
+		int newArray[] = new int[n];
 		int counter = 0;
 		
 		for (int i = array.length - n; i < array.length; i++) {
-			new_array[counter] = array[i];
+			newArray[counter] = array[i];
 			counter++;
 		}
 		
-		return new_array;
+		return newArray;
 	}
 	public static boolean isSortedArrayEqual(int array1[], int array2[]) {
 		/*
@@ -255,22 +255,22 @@ public class Vector {
 		 * EL NÚMERO DE REEMPLAZOS QUE TIENE QUE REALIZAR
 		 * Y VA REEMPLAZANDO EL ARRAY HASTA QUE FINALICE.
 		 */
-		int array_length = array.length;
-		double number_of_replacements = array_length / 2;
-		int replaced_number;
-		int position_of_replaced = 0;
+		int arrayLength = array.length;
+		double numberOfReplacements = arrayLength / 2;
+		int replacedNumber;
+		int positionOfReplaced = 0;
 
-		if (number_of_replacements % 2 != 0) {
-			number_of_replacements -= 0.5;
+		if (numberOfReplacements % 2 != 0) {
+			numberOfReplacements -= 0.5;
 		}
 
-		for (int i = array_length - 1; i > 0; i--) {
-			if (position_of_replaced < number_of_replacements) {
-				replaced_number = array[position_of_replaced];
-				array[position_of_replaced] = array[i];
-				array[i] = replaced_number;
+		for (int i = arrayLength - 1; i > 0; i--) {
+			if (positionOfReplaced < numberOfReplacements) {
+				replacedNumber = array[positionOfReplaced];
+				array[positionOfReplaced] = array[i];
+				array[i] = replacedNumber;
 
-				position_of_replaced++;
+				positionOfReplaced++;
 			}
 		}
 
@@ -301,26 +301,26 @@ public class Vector {
 		 * NÚMEROS. LUEGO SE RECORRE ESTE NUEVO ARRAY
 		 * Y SE RETORNA EL NÚMERO QUE MÁS VECES APARECE.
 		 */
-		int new_array[] = new int[10];
-		int most_repeated_times = 0;
-		int most_repeated_number = 0;
+		int newArray[] = new int[10];
+		int mostRepeatedTimes = 0;
+		int mostRepeatedNumber = 0;
 		
 		for (int i = 0; i < array.length; i++) {
-			for (int j = 0; j < new_array.length; j++) {
+			for (int j = 0; j < newArray.length; j++) {
 				if (array[i] == j + 1) {
-					new_array[j] += 1;
+					newArray[j] += 1;
 				}
 			}
 		}
 		
-		for (int x = 0; x < new_array.length; x++) {
-			if (new_array[x] > most_repeated_times) {
-				most_repeated_times = new_array[x];
-				most_repeated_number = x + 1;
+		for (int x = 0; x < newArray.length; x++) {
+			if (newArray[x] > mostRepeatedTimes) {
+				mostRepeatedTimes = newArray[x];
+				mostRepeatedNumber = x + 1;
 			}
 		}
 		
-		return most_repeated_number;
+		return mostRepeatedNumber;
 	}
 	public static int[] returnNumbersInFirstArrayAndNotInSecond(int array1[], int array2[]) {
 		/*
@@ -331,15 +331,15 @@ public class Vector {
 		 * DEL ARRAY Y VOLVEMOS A RECORRER EL BUCLE PARA ASIGNARLE
 		 * LOS VALORES Y RETORNAR EL NUEVO ARRAY.
 		 */
-		int array_length = 0;
+		int arrayLength = 0;
 		
 		for (int i = 0; i < array1.length; i++) {
 			if (!containsIntArray(array2, array1[i])) {
-				array_length++;
+				arrayLength++;
 			}
 		}
 		
-		int array3[] = new int[array_length];
+		int array3[] = new int[arrayLength];
 		int counter = 0;
 		
 		for (int j = 0; j < array1.length; j++) {
@@ -350,6 +350,5 @@ public class Vector {
 		}
 		
 		return array3;
-	}
-	
+	}	
 }
