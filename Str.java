@@ -2,7 +2,7 @@ package d;
 
 public class Str {
 	
-	public static String replaceCharFromString(String s, char old_char, char new_char) {
+	public static String replaceCharFromString(String s, char oldChar, char newChar) {
 		/*
 		 * MÉTODO QUE RECIBE UN PARÁMETRO DE TIPO STRING QUE ES
 		 * LA PALABRA A REEMPLAZAR Y 2 VARIABLES DE TIPO CHAR
@@ -15,8 +15,8 @@ public class Str {
 		StringBuffer sb = new StringBuffer("");
 		
 		for (int i = 0; i < s.length(); i++) {
-			if (s.toUpperCase().charAt(i) == old_char) {
-				sb.append(new_char);
+			if (s.toUpperCase().charAt(i) == oldChar) {
+				sb.append(newChar);
 			} else {
 				sb.append(s.charAt(i));
 			}
@@ -89,7 +89,7 @@ public class Str {
 			return true;
 		}
 	}
-	public static String extractString(String s, int initial_pos, int final_pos) {
+	public static String extractString(String s, int initialPos, int finalPos) {
 		/*
 		 * MÉTODO QUE RECIBE UN STRING QUE REPRESENTA LA CADENA
 		 * Y 2 DATOS DE TIPO INT QUE REPRESENTAN LA POSICIÓN INICIAL
@@ -100,13 +100,13 @@ public class Str {
 		 */
 		StringBuffer sb = new StringBuffer("");
 		
-		for (int i = initial_pos; i <= final_pos; i++) {
+		for (int i = initialPos; i <= finalPos; i++) {
 			sb.append(s.charAt(i));
 		}
 		
 		return sb.toString();
 	}
-	public static String deleteString(String s, int initial_pos, int final_pos) {
+	public static String deleteString(String s, int initialPos, int finalPos) {
 		/*
 		 * MÉTODO QUE RECIBE UN STRING QUE REPRESENTA LA CADENA
 		 * Y 2 DATOS DE TIPO INT QUE REPRESENTAN LA POSICIÓN INICIAL
@@ -118,14 +118,14 @@ public class Str {
 		StringBuffer sb = new StringBuffer("");
 		
 		for (int i = 0; i < s.length(); i++) {
-			if (i < initial_pos || i > final_pos) {
+			if (i < initialPos || i > finalPos) {
 				sb.append(s.charAt(i));
 			}
 		}
 		
 		return sb.toString();
 	}
-	public static String insertString(String s1, String s2, int initial_pos) {
+	public static String insertString(String s1, String s2, int initialPos) {
 		/*
 		 * MÉTODO QUE RECIBE 2 STRINGS POR PARÁMETROS QUE REPRESENTAN
 		 * 2 CADENAS DE TEXTO Y UN DATO DE TIPO INT QUE REPRESENTA
@@ -139,7 +139,7 @@ public class Str {
 		StringBuffer sb = new StringBuffer("");
 		
 		for (int i = 0; i < s1.length(); i++) {
-			if (i == initial_pos) {
+			if (i == initialPos) {
 				sb.append(s2);
 			}
 			sb.append(s1.charAt(i));
@@ -153,9 +153,9 @@ public class Str {
 		 * CONVIERTE EL STRING EN UN ARRAY DEL MISMO TIPO Y RETORNA
 		 * EL TAMAÑO DE DICHO ARRAY.
 		 */
-		String s_array[] = s.split(" ");
+		String sArray[] = s.split(" ");
 		
-		return s_array.length;
+		return sArray.length;
 	}
 	public static String longestWord(String s) {
 		/*
@@ -164,16 +164,15 @@ public class Str {
 		 * USA UN BUCLE FOR Y EVALÚA LA PALABRA DE MAYOR TAMAÑO Y
 		 * POSTERIORMENTE SE LO ASIGNA A LA VARIABLE "LONGEST_WORD".
 		 */
-		String s_array[] = s.split(" ");
-		String longest_word = "";
+		String sArray[] = s.split(" ");
+		String longestWord = "";
 		
-		for (int i = 0; i < s_array.length; i++) {
-			if (s_array[i].length() > longest_word.length()) {
-				longest_word = s_array[i];
+		for (int i = 0; i < sArray.length; i++) {
+			if (sArray[i].length() > longestWord.length()) {
+				longestWord = sArray[i];
 			}
 		}
 		
-		return longest_word;
+		return longestWord;
 	}
-	
 }
