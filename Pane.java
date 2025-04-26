@@ -12,43 +12,43 @@ public class Pane {
 		 * COMPRUEBA QUE EL STRING QUE LEE POR PANEL SEA INFERIOR AL TAMAÑO MÁXIMO
 		 * Y QUE TODOS LOS CARACTERES SEAN LETRAS.
 		 */
-		String verified_string = "";
-		boolean keep_going = true;
-		int length_limit = 8;
-		String error_message;
+		String verifiedString = "";
+		boolean keepGoing = true;
+		int lengthLimit = 8;
+		String errorMessage;
 		
 		do {
 			try {
-				keep_going = true;
-				error_message = "ERROR: has introducido un formato incorrecto";
-				verified_string = JOptionPane.showInputDialog(null, message);
+				keepGoing = true;
+				errorMessage = "ERROR: has introducido un formato incorrecto";
+				verifiedString = JOptionPane.showInputDialog(null, message);
 				
-				if (verified_string.length() > length_limit) {
-					error_message = "ERROR: se ha superado el límite de " + length_limit + " caracteres";
-					keep_going = false;
-				} else if (verified_string.length() == 0) {
-					error_message = "ERROR: no se ha introducido ningún dato";
-					keep_going = false;
+				if (verifiedString.length() > lengthLimit) {
+					errorMessage = "ERROR: se ha superado el límite de " + lengthLimit + " caracteres";
+					keepGoing = false;
+				} else if (verifiedString.length() == 0) {
+					errorMessage = "ERROR: no se ha introducido ningún dato";
+					keepGoing = false;
 				} else {
-					for (int i = 0; i < verified_string.length(); i++) {
-						if (!Character.isLetter(verified_string.charAt(i)) && !Character.isSpaceChar(' ')) {
-							i = verified_string.length();
-							keep_going = false;
+					for (int i = 0; i < verifiedString.length(); i++) {
+						if (!Character.isLetter(verifiedString.charAt(i)) && !Character.isSpaceChar(' ')) {
+							i = verifiedString.length();
+							keepGoing = false;
 						}
 					}					
 				}
 			} catch (Exception e) {
-				error_message = "ERROR: ha surjido una excepción";
-				keep_going = false;
+				errorMessage = "ERROR: ha surjido una excepción";
+				keepGoing = false;
 			}
 			
-			if (!keep_going) {
-				JOptionPane.showMessageDialog(null, error_message);
+			if (!keepGoing) {
+				JOptionPane.showMessageDialog(null, errorMessage);
 			}
 			
-		} while (!keep_going);
+		} while (!keepGoing);
 		
-		return verified_string;
+		return verifiedString;
 	}
 	public static int paneErrorManagementInt(String message) {
 		/*
@@ -57,39 +57,39 @@ public class Pane {
 		 * MENSAJE.
 		 * SE CONTROLA QUE EL USUARIO PONGA UN NÚMERO ENTERO.
 		 */
-		String verified_string = "";
-		int verified_int = 0;
-		boolean keep_going = true;
-		String error_message = "";
+		String verifiedString = "";
+		int verifiedInt = 0;
+		boolean keepGoing = true;
+		String errorMessage = "";
 		
 		do {
 			try {
-				keep_going = true;
-				verified_string = JOptionPane.showInputDialog(null, message);
+				keepGoing = true;
+				verifiedString = JOptionPane.showInputDialog(null, message);
 				
-				for (int i = 0; i < verified_string.length(); i++) {
-					if (!Character.isDigit(verified_string.charAt(i))) {
-						error_message = "ERROR: debes introducir números";
-						keep_going = false;
-						i = verified_string.length();
+				for (int i = 0; i < verifiedString.length(); i++) {
+					if (!Character.isDigit(verifiedString.charAt(i))) {
+						errorMessage = "ERROR: debes introducir números";
+						keepGoing = false;
+						i = verifiedString.length();
 					}
 				}
 			} catch (NullPointerException e) {
-				error_message = "ERROR: no puedes cerrar esta ventana";
-				keep_going = false;
+				errorMessage = "ERROR: no puedes cerrar esta ventana";
+				keepGoing = false;
 			} catch (Exception e) {
-				error_message = "ERROR: ha surjido una excepción";
-				keep_going = false;
+				errorMessage = "ERROR: ha surjido una excepción";
+				keepGoing = false;
 			}
 			
-			if (!keep_going) {
-				JOptionPane.showMessageDialog(null, error_message);
+			if (!keepGoing) {
+				JOptionPane.showMessageDialog(null, errorMessage);
 			} else {
-				verified_int = Integer.parseInt(verified_string);
+				verifiedInt = Integer.parseInt(verifiedString);
 			}
-		} while (!keep_going);
+		} while (!keepGoing);
 		
-		return verified_int;
+		return verifiedInt;
 	}
 	public static double consoleErrorManagementDouble(String message) {
 		/*
@@ -99,39 +99,39 @@ public class Pane {
 		 * SE CONTROLA QUE EL USUARIO PONGA UN NÚMERO CON COMA
 		 * FLOTANTE.
 		 */
-		String verified_string = "";
-		double verified_double = 0;
-		boolean keep_going = true;
-		String error_message = "";
+		String verifiedString = "";
+		double verifiedDouble = 0;
+		boolean keepGoing = true;
+		String errorMessage = "";
 		
 		do {
 			try {
-				keep_going = true;
-				verified_string = JOptionPane.showInputDialog(null, message);
+				keepGoing = true;
+				verifiedString = JOptionPane.showInputDialog(null, message);
 				
-				for (int i = 0; i < verified_string.length(); i++) {
-					if (!Character.isDigit(verified_string.charAt(i))) {
-						error_message = "ERROR: debes introducir números";
-						keep_going = false;
-						i = verified_string.length();
+				for (int i = 0; i < verifiedString.length(); i++) {
+					if (!Character.isDigit(verifiedString.charAt(i))) {
+						errorMessage = "ERROR: debes introducir números";
+						keepGoing = false;
+						i = verifiedString.length();
 					}
 				}
 			} catch (NullPointerException e) {
-				error_message = "ERROR: no puedes cerrar esta ventana";
-				keep_going = false;
+				errorMessage = "ERROR: no puedes cerrar esta ventana";
+				keepGoing = false;
 			} catch (Exception e) {
-				error_message = "ERROR: ha surjido una excepción";
-				keep_going = false;
+				errorMessage = "ERROR: ha surjido una excepción";
+				keepGoing = false;
 			}
 			
-			if (!keep_going) {
-				JOptionPane.showMessageDialog(null, error_message);
+			if (!keepGoing) {
+				JOptionPane.showMessageDialog(null, errorMessage);
 			} else {
-				verified_double = Double.parseDouble(verified_string);
+				verifiedDouble = Double.parseDouble(verifiedString);
 			}
-		} while (!keep_going);
+		} while (!keepGoing);
 		
-		return verified_double;
+		return verifiedDouble;
 	}
 	public static int[] paneReadArrayOfInt(String message, char divider) {
 		/*
@@ -144,46 +144,46 @@ public class Pane {
 		 * LUEGO LO SEPARA EN UN ARRAY DE TIPO STRING Y SE CASTEA A OTRO ARRAY DE
 		 * TIPO INT Y LO RETORNA.
 		 */
-		String read_string;
-		boolean keep_going = true;
-		String error_message = "";
+		String readString;
+		boolean keepGoing = true;
+		String errorMessage = "";
 		
 		do {
-			keep_going = true;
-			read_string = JOptionPane.showInputDialog(null, message);
+			keepGoing = true;
+			readString = JOptionPane.showInputDialog(null, message);
 			
-			for (int i = 1; i < read_string.length(); i++) {
-				if (read_string.charAt(0) == divider || read_string.charAt(read_string.length() - 1) == divider) {
-					keep_going = false;
-					i = read_string.length();
-					error_message = "ERROR: no puedes introducir el separador al inicio ni al final";
+			for (int i = 1; i < readString.length(); i++) {
+				if (readString.charAt(0) == divider || readString.charAt(readString.length() - 1) == divider) {
+					keepGoing = false;
+					i = readString.length();
+					errorMessage = "ERROR: no puedes introducir el separador al inicio ni al final";
 				}
-				if (read_string.charAt(i - 1) == divider && read_string.charAt(i) == divider) {
-					keep_going = false;
-					i = read_string.length();
-					error_message = "ERROR: no puedes introducir 2 o más separadores juntos";
+				if (readString.charAt(i - 1) == divider && readString.charAt(i) == divider) {
+					keepGoing = false;
+					i = readString.length();
+					errorMessage = "ERROR: no puedes introducir 2 o más separadores juntos";
 				}
-				if (!Character.isDigit(read_string.charAt(i)) && read_string.charAt(i) != divider) {
-					keep_going = false;
-					i = read_string.length();
-					error_message = "ERROR: has introducido un formato incorrecto";
+				if (!Character.isDigit(readString.charAt(i)) && readString.charAt(i) != divider) {
+					keepGoing = false;
+					i = readString.length();
+					errorMessage = "ERROR: has introducido un formato incorrecto";
 				}
 			}
 			
-			if (!keep_going) {
-				JOptionPane.showMessageDialog(null, error_message);
+			if (!keepGoing) {
+				JOptionPane.showMessageDialog(null, errorMessage);
 			}
 			
-		} while (!keep_going);
+		} while (!keepGoing);
 		
-		String string_array[] = read_string.split(Character.toString(divider));
-		int int_array[] = new int[string_array.length];
+		String stringArray[] = readString.split(Character.toString(divider));
+		int intArray[] = new int[stringArray.length];
 		
-		for (int j = 0; j < string_array.length; j++) {
-			int_array[j] = Integer.parseInt(string_array[j]);
+		for (int j = 0; j < stringArray.length; j++) {
+			intArray[j] = Integer.parseInt(stringArray[j]);
 		}
 		
-		return int_array;
+		return intArray;
 	}
 	public static void printPaneArrayOfInt(int array[]) {
 		/*
@@ -216,57 +216,57 @@ public class Pane {
 		 * SATISFACTORIAMENTE, SE RETORNA UNA MATRIZ DE TIPO
 		 * INT CON LOS DATOS INDICADOS POR EL USUARIO.
 		 */
-		String read_string;
-		boolean keep_going = true;
-		String error_message = "";
-		int int_matrix[][] = new int[rows][columns];
+		String readString;
+		boolean keepGoing = true;
+		String errorMessage = "";
+		int intMatrix[][] = new int[rows][columns];
 		
 		do {
-			keep_going = true;
-			read_string = JOptionPane.showInputDialog(null, message);
+			keepGoing = true;
+			readString = JOptionPane.showInputDialog(null, message);
 			
-			for (int i = 1; i < read_string.length(); i++) {
-				if (read_string.charAt(0) == divider || read_string.charAt(read_string.length() - 1) == divider) {
-					keep_going = false;
-					i = read_string.length();
-					error_message = "ERROR: no puedes introducir el separador al inicio ni al final";
-				} else if (read_string.charAt(i - 1) == divider && read_string.charAt(i) == divider) {
-					keep_going = false;
-					i = read_string.length();
-					error_message = "ERROR: no puedes introducir 2 o más separadores juntos";
-				} else if (!Character.isDigit(read_string.charAt(i)) && read_string.charAt(i) != divider) {
-					keep_going = false;
-					i = read_string.length();
-					error_message = "ERROR: has introducido un formato incorrecto";
+			for (int i = 1; i < readString.length(); i++) {
+				if (readString.charAt(0) == divider || readString.charAt(readString.length() - 1) == divider) {
+					keepGoing = false;
+					i = readString.length();
+					errorMessage = "ERROR: no puedes introducir el separador al inicio ni al final";
+				} else if (readString.charAt(i - 1) == divider && readString.charAt(i) == divider) {
+					keepGoing = false;
+					i = readString.length();
+					errorMessage = "ERROR: no puedes introducir 2 o más separadores juntos";
+				} else if (!Character.isDigit(readString.charAt(i)) && readString.charAt(i) != divider) {
+					keepGoing = false;
+					i = readString.length();
+					errorMessage = "ERROR: has introducido un formato incorrecto";
 				}
 			}
 			
-			if (keep_going) {
-				String string_array[] = read_string.split(Character.toString(divider));
+			if (keepGoing) {
+				String string_array[] = readString.split(Character.toString(divider));
 				if (string_array.length == (rows * columns)) {
 					
 					int counter = 0;
 					
 					for (int j = 0; j < rows; j++) {
 						for (int x = 0; x < columns; x++) {
-							int_matrix[j][x] = Integer.parseInt(string_array[counter]);
+							intMatrix[j][x] = Integer.parseInt(string_array[counter]);
 							counter++;
 						}
 					}
 					
-					return int_matrix;
+					return intMatrix;
 				} else {
-					keep_going = false;
-					error_message = "ERROR: no has introducido los datos correctamente";
+					keepGoing = false;
+					errorMessage = "ERROR: no has introducido los datos correctamente";
 				}
 			}
 			
-			if (!keep_going) {
-				JOptionPane.showMessageDialog(null, error_message);
+			if (!keepGoing) {
+				JOptionPane.showMessageDialog(null, errorMessage);
 			}
-		} while (!keep_going);
+		} while (!keepGoing);
 		
-		return int_matrix;
+		return intMatrix;
 	}
 	public static void printPaneMatrixOfInt(int matrix[][]) {
 		/*
