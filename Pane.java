@@ -1,8 +1,5 @@
 package d;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 import javax.swing.JOptionPane;
 
 public class Pane {
