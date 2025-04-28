@@ -1,5 +1,7 @@
 package d;
 
+import java.time.LocalDate;
+
 import javax.swing.JOptionPane;
 
 public class Pane {
@@ -91,7 +93,7 @@ public class Pane {
 		
 		return verifiedInt;
 	}
-	public static double consoleErrorManagementDouble(String message) {
+	public static double paneErrorManagementDouble(String message) {
 		/*
 		 * MÉTODO QUE RECIBE UN OBJETO DE TIPO SCANNER PARA LEER
 		 * POR JOPTIONPANE Y OTRO DE TIPO STRING QUE REPRESENTA UN
@@ -132,6 +134,21 @@ public class Pane {
 		} while (!keepGoing);
 		
 		return verifiedDouble;
+	}
+	public static LocalDate paneErrorManagementLocalDate(String message) {
+		String regex = "\\d{4}-\\d{2}-\\d{2}";
+		String date;
+		boolean keepGoing = false;
+		
+		do {
+			date = paneErrorManagementString(message);
+			
+			if (date.matches(regex)) {
+				keepGoing = true;
+			}
+		} while (!keepGoing);
+		
+		return LocalDate.parse(date);
 	}
 	public static int[] paneReadArrayOfInt(String message, char divider) {
 		/*
