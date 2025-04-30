@@ -143,13 +143,27 @@ public class Pane {
 		do {
 			date = paneErrorManagementString(message);
 			
-			if (date.matches(regex)) {
+			if (date.matches(regex) && isValidDate(date)) {
 				keepGoing = true;
 			}
 		} while (!keepGoing);
 		
 		return LocalDate.parse(date);
 	}
+	public static boolean isValidDate(String date) {
+		String dateArray[] = date.split("-");
+		
+		if (Integer.parseInt(dateArray[0]) > 0 && Integer.parseInt(dateArray[0]) <= LocalDate.now().getYear()) {
+			if (Integer.parseInt(dateArray[1]) > 0 && Integer.parseInt(dateArray[1]) <= 12) {
+				if (Integer.parseInt(dateArray[2]) > 0 && Integer.parseInt(dateArray[2]) <= 31) {
+					return true;
+				}
+			}
+		}
+			
+		return false;
+	}
+
 	public static int[] paneReadArrayOfInt(String message, char divider) {
 		/*
 		 * MÉTODO QUE RECIBE UN OBJETO DE TIPO SCANNER, OTRO DE TIPO STRING
