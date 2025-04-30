@@ -1,6 +1,7 @@
 package d;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -351,6 +352,15 @@ public class Pane {
 				}
 			}
 			sb.append("\n");
+		}
+		
+		JOptionPane.showMessageDialog(null, sb);
+	}
+	public static void printPaneArrayList(ArrayList<Object> objectList) {
+		StringBuffer sb = new StringBuffer("LISTA DE OBJETOS\n");
+		
+		for (int i = 0; i < objectList.size(); i++) {
+			sb.append(objectList.get(i).toString() + "\n");
 		}
 		
 		JOptionPane.showMessageDialog(null, sb);
