@@ -163,7 +163,17 @@ public class Pane {
 			
 		return false;
 	}
-
+	public static boolean paneErrorManagementBoolean(String message) {
+		String stringBoolean;
+		
+		stringBoolean = paneErrorManagementString(message);
+		
+		if (stringBoolean.toUpperCase().charAt(0) == 'V') {
+			return true;
+		}
+		
+		return false;
+	}
 	public static int[] paneReadArrayOfInt(String message, char divider) {
 		/*
 		 * MÉTODO QUE RECIBE UN OBJETO DE TIPO SCANNER, OTRO DE TIPO STRING
