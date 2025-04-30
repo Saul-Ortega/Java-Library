@@ -112,12 +112,17 @@ public class Pane {
 				keepGoing = true;
 				verifiedString = JOptionPane.showInputDialog(null, message);
 				
-				for (int i = 0; i < verifiedString.length(); i++) {
-					if (!Character.isDigit(verifiedString.charAt(i))) {
-						errorMessage = "ERROR: debes introducir números";
-						keepGoing = false;
-						i = verifiedString.length();
-					}
+				if (verifiedString.length() == 0) {
+					keepGoing = false;
+					errorMessage = "ERROR: debes introducir un número";
+				} else {
+					for (int i = 0; i < verifiedString.length(); i++) {
+						if (!Character.isDigit(verifiedString.charAt(i)) && verifiedString.charAt(i) != '.') {
+							errorMessage = "ERROR: debes introducir números";
+							keepGoing = false;
+							i = verifiedString.length();
+						}
+					}					
 				}
 			} catch (NullPointerException e) {
 				errorMessage = "ERROR: no puedes cerrar esta ventana";
