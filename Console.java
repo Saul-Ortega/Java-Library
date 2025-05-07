@@ -1,5 +1,6 @@
 package d;
 
+import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -20,7 +21,7 @@ public class Console {
 		 */
 		String verifiedString = "";
 		boolean keepGoing = true;
-		int lenghLimit = 8;
+		int lenghLimit = 35;
 		String errorMessage;
 		
 		do {
@@ -126,6 +127,47 @@ public class Console {
 		//keyboard.nextLine(); LIMPIAR EL BÚFER
 		
 		return verifiedDouble;
+	}
+	public static LocalDate consoleErrorManagementLocalDate(String message) {
+		Scanner keyboard = new Scanner(System.in);
+		String regex = "\\d{4}-\\d{2}-\\d{2}";
+		String date;
+		boolean keepGoing = false;
+		
+		do {
+			date = consoleErrorManagementString(keyboard, message);
+			
+			if (date.matches(regex) && isValidDate(date)) {
+				keepGoing = true;
+			}
+		} while (!keepGoing);
+		
+		return LocalDate.parse(date);
+	}
+	public static boolean isValidDate(String date) {
+		String dateArray[] = date.split("-");
+		
+		if (Integer.parseInt(dateArray[0]) > 0 && Integer.parseInt(dateArray[0]) <= LocalDate.now().getYear()) {
+			if (Integer.parseInt(dateArray[1]) > 0 && Integer.parseInt(dateArray[1]) <= 12) {
+				if (Integer.parseInt(dateArray[2]) > 0 && Integer.parseInt(dateArray[2]) <= 31) {
+					return true;
+				}
+			}
+		}
+			
+		return false;
+	}
+	public static boolean consoleErrorManagementBoolean(String message) {
+		Scanner keyboard = new Scanner(System.in);
+		String stringBoolean;
+		
+		stringBoolean = consoleErrorManagementString(keyboard, message);
+		
+		if (stringBoolean.toUpperCase().charAt(0) == 'V') {
+			return true;
+		}
+		
+		return false;
 	}
 	public static int[] consoleReadArrayOfInt(Scanner keyboard, String message, char divider) {
 		/*
